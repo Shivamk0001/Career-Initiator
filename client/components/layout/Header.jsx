@@ -49,7 +49,7 @@ export default function Header() {
                 <FaInstagram className="hover:text-[#E4405F] transition-all hover:scale-110 text-sm" />
               </Link>
               <Link href="https://linkedin.com" target="_blank">
-                <FaLinkedin className="hover:text-[#0A66C2] transition-all hover:scale-110 text-sm" />
+                <FaLinkedin className="hover:text-[#77a4d2] transition-all hover:scale-110 text-sm" />
               </Link>
               <Link href="https://wa.me/917987081188" target="_blank">
                 <FaWhatsapp className="hover:text-[#25D366] transition-all hover:scale-110 text-base" />
