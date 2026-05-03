@@ -2,121 +2,113 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, GraduationCap, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Search, GraduationCap } from "lucide-react";
 
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
     },
   };
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden px-4 py-12 md:py-24 flex items-center justify-center">
-      {/* 1. Animated Gradient Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-brand-500/20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-emerald-500/10 blur-[100px]" />
+    // Background color matched with header for seamless look
+    <section className="relative min-h-[85vh] overflow-hidden px-6 pt-12 pb-24 flex flex-col items-center justify-center bg-[#05070a]">
+      
+      {/* 1. Subtle Glow Backgrounds (No Grids) */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-brand-500/10 blur-[120px]" />
+        <div className="absolute bottom-[10%] right-[-5%] h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-[100px]" />
       </div>
-
-      {/* 2. Grid Pattern Overlay */}
-      <div className="absolute inset-0 -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
       <div className="mx-auto max-w-6xl w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-[3rem] p-6 md:p-16 lg:p-24 shadow-2xl overflow-hidden"
+          className="relative text-center"
         >
-          {/* Decorative Corner Light */}
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-500/30 blur-[80px]" />
-
-          {/* Badge */}
+          {/* Badge: Career Initiator Branding */}
           <motion.div 
             variants={itemVariants}
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs md:text-sm font-medium text-brand-300 backdrop-blur-md"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold text-brand-300 backdrop-blur-xl"
           >
-            <Sparkles size={14} className="text-brand-400" />
-            <span className="tracking-wide uppercase">Empowering Futures</span>
+            <GraduationCap size={14} className="text-brand-400" />
+            <span className="tracking-widest uppercase">Career Initiator • Clarity In Every Step</span>
           </motion.div>
 
-          {/* Main Heading */}
+          {/* Main Heading: Tightened margins and larger scale */}
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl"
+            className="mx-auto max-w-5xl text-5xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl leading-[1.1]"
           >
-            Design Your Destiny with <br className="hidden md:block" />
-            <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-gradient-to-r from-brand-400 via-emerald-400 to-brand-500 bg-clip-text text-transparent">
-                Career Initiator
-              </span>
-              {/* Subtle underline glow */}
-              <div className="absolute bottom-2 left-0 h-[2px] w-full bg-brand-500/30 blur-sm" />
+            To achieve your goals <br />
+            <span className="bg-gradient-to-r from-brand-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
+               know your strength
             </span>
           </motion.h1>
 
           {/* Subtext */}
           <motion.p 
             variants={itemVariants}
-            className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-slate-400 md:text-xl"
+            className="mx-auto mt-0 max-w-3xl text-base leading-relaxed text-slate-500 md:text-xl"
           >
-            Navigate the complex world of education with ease. From college comparisons 
-            to exam tracking, we provide the tools you need to succeed.
+            Stop guessing your future. Move from confusion to a structured plan with 
+            expert guidance, college intelligence, and exam tracking.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Action Buttons */}
           <motion.div 
             variants={itemVariants} 
             className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link
-              href="/colleges"
-              className="group relative flex w-full sm:w-auto items-center justify-center gap-2 overflow-hidden rounded-2xl bg-brand-500 px-8 py-4 font-bold text-white transition-all hover:scale-105 active:scale-95"
+              href="#get-started"
+              className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-xl bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-600 hover:scale-[1.02] active:scale-95"
             >
-              <span>Explore Colleges</span>
+              Get Started Now
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
             
             <Link
               href="/careers"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/20"
+              className="flex w-full sm:w-auto items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-base font-bold text-white transition-all hover:bg-white/10"
             >
               <Search size={18} />
               Browse Careers
             </Link>
           </motion.div>
 
-          {/* Stats / Trust Section */}
+          {/* Clean Stats (No Border Box) */}
           <motion.div 
             variants={itemVariants}
-            className="mt-16 grid grid-cols-2 gap-8 border-t border-white/5 pt-12 md:grid-cols-3"
+            className="mt-20 grid grid-cols-2 gap-12 md:grid-cols-3 opacity-80"
           >
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-3xl font-bold text-white">500+</span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Colleges Partnered</span>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-white">500+</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500 font-bold">Partnered Colleges</p>
             </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-3xl font-bold text-white">50+</span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Exam Trackers</span>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-white">50+</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500 font-bold">Exam Trackers</p>
             </div>
-            <div className="flex flex-col items-center gap-1 col-span-2 md:col-span-1">
-              <span className="text-3xl font-bold text-white">10k+</span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Success Stories</span>
+            <div className="text-center col-span-2 md:col-span-1">
+              <p className="text-3xl font-bold text-emerald-400">10k+</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500 font-bold">Success Stories</p>
             </div>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
