@@ -30,33 +30,51 @@ export default function FaqSectionHome() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="px-4 py-20 md:py-28">
+    <section className="relative px-4 py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-100">
+      
+      {/* soft glow background */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.15),transparent_60%)]" />
+
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-center text-2xl font-bold text-white md:text-3xl">Frequently asked questions</h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-sm text-slate-400 md:text-base">
+        <h2 className="text-center text-2xl font-bold text-slate-900 md:text-3xl">
+          Frequently asked questions
+        </h2>
+
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm text-slate-600 md:text-base">
           Straight answers about how we help you move from confusion to a clear plan.
         </p>
-        <ul className="mt-12 space-y-3">
+
+        <ul className="mt-12 space-y-4">
           {ITEMS.map((item, i) => {
             const isOpen = open === i;
+
             return (
-              <li key={item.q} className="rounded-2xl border border-white/10 bg-white/[0.02]">
+              <li
+                key={item.q}
+                className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition"
+              >
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-white md:text-base"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-slate-900 md:text-base"
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   aria-expanded={isOpen}
                 >
-                  {item.q}
+                  <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    {item.q}
+                  </span>
+
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-cyan-400 transition ${isOpen ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-sky-500 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
-                {isOpen ? (
-                  <div className="border-t border-white/5 px-5 pb-4 pt-0 text-sm leading-relaxed text-slate-400">
+
+                {isOpen && (
+                  <div className="border-t border-slate-100 px-5 pb-5 pt-3 text-sm leading-relaxed text-slate-600">
                     {item.a}
                   </div>
-                ) : null}
+                )}
               </li>
             );
           })}
