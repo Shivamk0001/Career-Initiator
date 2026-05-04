@@ -33,19 +33,21 @@ export function IntroBand() {
 
 export function SmartCareerHeading() {
   return (
-    <section className="border-y border-slate-100 bg-slate-50/50 px-4 py-14 md:py-20">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-600">Why we exist</p>
-        <h2 className="mt-3 text-2xl font-extrabold text-slate-900 md:text-4xl">
-          Career Initiator — your guide to smart career decisions
-        </h2>
-        <p className="mt-5 text-sm leading-relaxed text-slate-600 md:text-base">
-          Personalised guidance for learners and working professionals: explore careers, compare
-          courses, understand exams, and connect the dots between what you enjoy and what the world
-          needs—without drowning in random advice threads.
-        </p>
-      </div>
-    </section>
+   <section className="border-y border-slate-100 bg-white px-4 py-14 md:py-20">
+  <div className="mx-auto max-w-4xl text-center">
+    <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-600">
+      Why we exist
+    </p>
+    <h2 className="mt-3 text-2xl font-extrabold text-slate-900 md:text-4xl">
+      Career Initiator — your guide to smart career decisions
+    </h2>
+    <p className="mt-5 text-sm leading-relaxed text-slate-600 md:text-base">
+      Personalised guidance for learners and working professionals: explore careers, compare
+      courses, understand exams, and connect the dots between what you enjoy and what the world
+      needs—without drowning in random advice threads.
+    </p>
+  </div>
+</section>
   );
 }
 
@@ -157,44 +159,53 @@ export function ServicesShowcase() {
   ];
 
   return (
-    <section className="px-4 py-20 md:py-28 bg-slate-50/50">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="text-center text-2xl font-bold text-slate-900 md:text-4xl">
-          How Career Initiator helps you succeed
-        </h2>
-        <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed text-slate-500 md:text-base">
-          A full stack of discovery tools emphasizing transparent navigation and trustworthy information.
-        </p>
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <article
-              key={s.title}
-              className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-cyan-200"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
-                <s.icon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-4 text-lg font-bold text-slate-900">{s.title}</h3>
-              <p className="mt-1 text-xs font-bold uppercase tracking-wide text-cyan-600/90">
-                {s.tagline}
-              </p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-              <ul className="mt-4 space-y-1 text-xs font-semibold text-slate-400">
-                {s.bullets.map((b) => (
-                  <li key={b}>• {b}</li>
-                ))}
-              </ul>
-              <Link
-                href={s.href}
-                className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-cyan-600 hover:text-cyan-700"
-              >
-                Know more <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+  <section className="px-4 py-20 md:py-28 bg-white">
+  <div className="mx-auto max-w-6xl">
+    <h2 className="text-center text-2xl font-bold text-slate-900 md:text-4xl">
+      How Career Initiator helps you succeed
+    </h2>
+
+    <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed text-slate-500 md:text-base">
+      A full stack of discovery tools emphasizing transparent navigation and trustworthy information.
+    </p>
+
+    <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <article
+          key={s.title}
+          className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-cyan-200"
+        >
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
+            <s.icon className="h-5 w-5" />
+          </div>
+
+          <h3 className="mt-4 text-lg font-bold text-slate-900">{s.title}</h3>
+
+          <p className="mt-1 text-xs font-bold uppercase tracking-wide text-cyan-600/90">
+            {s.tagline}
+          </p>
+
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
+            {s.body}
+          </p>
+
+          <ul className="mt-4 space-y-1 text-xs font-semibold text-slate-400">
+            {s.bullets.map((b) => (
+              <li key={b}>• {b}</li>
+            ))}
+          </ul>
+
+          <Link
+            href={s.href}
+            className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-cyan-600 hover:text-cyan-700"
+          >
+            Know more <ArrowRight className="h-4 w-4" />
+          </Link>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 
@@ -218,20 +229,34 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="border-t border-slate-100 px-4 py-20 md:py-28 bg-white">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="text-center text-2xl font-bold text-slate-900 md:text-4xl">Curious how it works?</h2>
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.step} className="relative rounded-3xl border border-slate-100 bg-slate-50/50 p-8 hover:bg-slate-50 transition-colors">
-              <span className="text-4xl font-black text-slate-200">{s.step}</span>
-              <h3 className="mt-4 text-lg font-bold text-slate-900">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">{s.body}</p>
-            </div>
-          ))}
+   <section className="border-t border-slate-100 px-4 py-20 md:py-28 bg-white">
+  <div className="mx-auto max-w-6xl">
+    <h2 className="text-center text-2xl font-bold text-slate-900 md:text-4xl">
+      Curious how it works?
+    </h2>
+
+    <div className="mt-14 grid gap-8 md:grid-cols-3">
+      {steps.map((s) => (
+        <div
+          key={s.step}
+          className="relative rounded-3xl border border-slate-100 bg-slate-50 p-8 hover:bg-slate-100 transition-colors"
+        >
+          <span className="text-4xl font-black text-slate-400">
+            {s.step}
+          </span>
+
+          <h3 className="mt-4 text-lg font-bold text-slate-900">
+            {s.title}
+          </h3>
+
+          <p className="mt-3 text-sm leading-relaxed text-slate-600">
+            {s.body}
+          </p>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 
@@ -244,18 +269,22 @@ export function TrustStats() {
   ];
 
   return (
-    <section className="px-4 py-16 md:py-20">
-      <div className="mx-auto max-w-6xl rounded-3xl border border-slate-200 bg-white p-8 md:p-12 shadow-inner">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map(([n, l]) => (
-            <div key={l} className="text-center">
-              <p className="text-3xl font-black text-cyan-600 md:text-4xl">{n}</p>
-              <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">{l}</p>
-            </div>
-          ))}
+   <section className="px-4 py-16 md:py-20 bg-white">
+  <div className="mx-auto max-w-6xl rounded-3xl border border-slate-200 bg-white p-8 md:p-12 shadow-sm">
+    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+      {stats.map(([n, l]) => (
+        <div key={l} className="text-center">
+          <p className="text-3xl font-black text-cyan-600 md:text-4xl">
+            {n}
+          </p>
+          <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            {l}
+          </p>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 
@@ -300,26 +329,34 @@ export function TestimonialsHome() {
 export function FinalCtaBand() {
   return (
     <section className="px-4 pb-24 pt-4 md:pb-32 bg-white">
-      <div className="mx-auto max-w-4xl rounded-3xl bg-slate-900 px-8 py-12 text-center md:px-16 shadow-2xl">
-        <h2 className="text-2xl font-bold text-white md:text-3xl uppercase tracking-tight">Ready for a clearer next step?</h2>
-        <p className="mt-4 text-sm text-slate-300 md:text-base font-light">
-          Jump into colleges, careers, or exams—or talk to us if you want a guided plan.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/colleges"
-            className="inline-flex w-full items-center justify-center rounded-xl bg-cyan-500 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-cyan-400 sm:w-auto"
-          >
-            Explore colleges
-          </Link>
-          <Link
-            href="#get-started"
-            className="inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-white/10 sm:w-auto"
-          >
-            Book a conversation
-          </Link>
-        </div>
-      </div>
-    </section>
+  <div className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white px-8 py-12 text-center md:px-16 shadow-sm">
+    
+    <h2 className="text-2xl font-bold text-slate-900 md:text-3xl uppercase tracking-tight">
+      Ready for a clearer next step?
+    </h2>
+
+    <p className="mt-4 text-sm text-slate-500 md:text-base font-normal">
+      Jump into colleges, careers, or exams—or talk to us if you want a guided plan.
+    </p>
+
+    <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      
+      <Link
+        href="/colleges"
+        className="inline-flex w-full items-center justify-center rounded-xl bg-cyan-500 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-cyan-400 sm:w-auto"
+      >
+        Explore colleges
+      </Link>
+
+      <Link
+        href="#get-started"
+        className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-8 py-4 text-sm font-bold uppercase tracking-widest text-slate-700 transition hover:bg-slate-50 sm:w-auto"
+      >
+        Book a conversation
+      </Link>
+
+    </div>
+  </div>
+</section>
   );
 }

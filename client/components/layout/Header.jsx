@@ -23,15 +23,15 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 z-50 w-full shadow-sm">
       {/* TOP BAR - Light Grey for clean separation */}
-      <div className="bg-[#000102] text-slate-00 border-b border-slate-200">
+      <div className="bg-[#002147] text-slate-00 border-b border-slate-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-[11px] font-semibold  tracking-wider">
           
           {/* EMAIL */}
           <a
             href="mailto:careerinitiator1188@gmail.com"
-            className="flex items-center gap-2 hover:text-cyan-600 transition-colors normal-case"
+            className="flex items-center gap-2 hover:text-rose-200 transition-colors normal-case"
           >
-            <Mail size={14} className="text-cyan-600" />
+            <Mail size={14} className="bg-[#002147] text-white" />
             <span className="lowercase font-medium">careerinitiator1188@gmail.com</span>
           </a>
 
@@ -78,19 +78,20 @@ export default function Header() {
             />
           </Link>
 
-          {/* NAVIGATION - Slate Grey text for a professional look */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map(([label, href]) => (
-              <Link
-                key={label}
-                href={href}
-                className="relative text-[13px] font-bold uppercase tracking-tight text-slate-900 hover:text-cyan-600 transition-colors group"
-              >
-                {label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </nav>
+         {/* NAVIGATION - Slate Grey text for a professional look */}
+<nav className="hidden lg:flex items-center gap-8">
+  {navItems.map(([label, href]) => (
+    <Link
+      key={label}
+      href={href}
+      className="relative text-[13px] font-bold uppercase tracking-tight text-slate-900 hover:text-orange-500 transition-colors group"
+    >
+      {label}
+      {/* Bottom line animation - Orange color */}
+      <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+    </Link>
+  ))}
+</nav>
 
           {/* RIGHT ACTIONS */}
           <div className="flex items-center gap-4">
@@ -105,7 +106,8 @@ export default function Header() {
             {!user ? (
               <Link
                 href="/login"
-                className="bg-cyan-600 hover:bg-cyan-700 text-white px-7 py-2 rounded-full text-[12px] font-bold uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-cyan-100"
+                className="bg-[#002147] hover:bg-[#003366] text-white px-7 py-2 rounded-full text-[12px] font-bold uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-900/20"
+                // className="bg-cyan-600 hover:bg-cyan-700 text-white px-7 py-2 rounded-full text-[12px] font-bold uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-cyan-100"
               >
                 Login
               </Link>
