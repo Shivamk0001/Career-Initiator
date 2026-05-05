@@ -4,12 +4,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, X, ArrowRight, Loader2 } from "lucide-react";
 import Image from "next/image";
+import { setSession } from "@/lib/auth";
 
 export default function AuthForm({ mode: initialMode = "login", onClose }) {
   const [mode, setMode] = useState(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const [form, setForm] = useState({
     fullName: "",
@@ -23,6 +25,7 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
 
   const handleChange = (e) => {
     setError("");
+    setSuccess("");
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -54,13 +57,57 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
 
     setIsLoading(true);
     setError("");
+    setSuccess("");
 
     try {
-      // Fake API simulation
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form Submitted Successfully:", form);
+      if (mode === "forget") {
+        setError("Password reset flow is not configured yet.");
+        setIsLoading(false); // Stop loading if checked here
+        return;
+      }
+
+      // 1. 🌟 BACKEND SERVER URL APNE ENDPOINTS ME ADD KAREIN
+      const endpoint =
+        mode === "signup"
+          ? "http://localhost:5000/api/auth/signup"
+          : "http://localhost:5000/api/auth/login";
+
+      const payload =
+        mode === "signup"
+          ? form
+          : {
+              email: form.email,
+              password: form.password,
+            };
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      
+      // 2. 🌟 !data.success WALI CONDITION KO HATA DIJIYE, KYUKI BACKEND SE APAN SIDA STATUS CODE CONTROL KAR RHE HAIN
+      if (!response.ok) {
+        throw new Error(data.message || "Authentication failed.");
+      }
+
+      if (mode === "login" && data.token) {
+        setSession(data.token, data.user);
+        localStorage.setItem("ci_auth_ready", "true");
+      }
+
+      setSuccess(data.message || "Success!");
+
+      if (onClose) {
+        setTimeout(() => onClose(), 500);
+      }
     } catch (err) {
       setError("Something went wrong. Please try again.");
+      if (err instanceof Error) {
+        setError(err.message);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -130,6 +177,19 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
               className="mb-4 px-3 py-2.5 rounded-lg bg-red-50 border border-red-100 text-xs text-red-600 font-medium"
             >
               {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence mode="popLayout">
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-4 px-3 py-2.5 rounded-lg bg-emerald-50 border border-emerald-100 text-xs text-emerald-700 font-medium"
+            >
+              {success}
             </motion.div>
           )}
         </AnimatePresence>
