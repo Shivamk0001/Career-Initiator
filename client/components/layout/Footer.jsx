@@ -9,16 +9,14 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#071428] text-white mt-16 border-t border-white/10">
-
-      <div className="mx-auto max-w-7xl px-6 py-12">
-
+    // Removed mt-16 to fix the black gap issue
+    <footer className="bg-[#002147] text-white border-t border-white/10">
+      <div className="mx-auto max-w-7xl px-6 py-14">
         {/* TOP GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10">
-
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
           {/* TOP CAREER */}
           <div>
-            <h3 className="text-cyan-300 font-semibold mb-4">Top Career</h3>
+            <h3 className="text-white font-semibold mb-4 text-lg">Top Career</h3>
             <ul className="space-y-2 text-sm text-white/70">
               <li>Engineering</li>
               <li>Data Science & AI</li>
@@ -33,7 +31,7 @@ export default function Footer() {
 
           {/* TOP COURSES */}
           <div>
-            <h3 className="text-cyan-300 font-semibold mb-4">Top Courses</h3>
+            <h3 className="text-white font-semibold mb-4 text-lg">Top Courses</h3>
             <ul className="space-y-2 text-sm text-white/70">
               <li>B.Tech</li>
               <li>MBA</li>
@@ -48,7 +46,7 @@ export default function Footer() {
 
           {/* HELP & SUPPORT */}
           <div>
-            <h3 className="text-cyan-300 font-semibold mb-4">Help & Support</h3>
+            <h3 className="text-white font-semibold mb-4 text-lg">Help & Support</h3>
             <ul className="space-y-2 text-sm text-white/70">
               <li>24/7 Live Help</li>
               <li>Feedback</li>
@@ -60,46 +58,43 @@ export default function Footer() {
 
           {/* GET IN TOUCH */}
           <div>
-            <h3 className="text-cyan-300 font-semibold mb-4">Get in Touch</h3>
-
+            <h3 className="text-white font-semibold mb-4 text-lg">Get in Touch</h3>
             <div className="text-sm text-white/70 space-y-2">
               <p>Bhopal, India</p>
               <p>Phone: +91 7987081188</p>
               <p>Email: careerinitiator1188@gmail.com</p>
             </div>
 
-            {/* SOCIAL */}
-            <div className="flex gap-3 mt-5">
+            {/* SOCIAL (Branding Colors on Hover) */}
+            <div className="flex gap-4 mt-6 text-2xl">
               <a href="https://www.facebook.com/profile.php?id=61582953866454" target="_blank">
-                <FaFacebook className="hover:text-blue-500 transition" />
+                <FaFacebook className="hover:text-blue-500 transition duration-200" />
               </a>
               <a href="https://www.instagram.com/careerinitiator.in?igsh=eDNxdHpiOG5jYXR6" target="_blank">
-                <FaInstagram className="hover:text-pink-500 transition" />
+                <FaInstagram className="hover:text-pink-500 transition duration-200" />
               </a>
               <a href="https://linkedin.com" target="_blank">
-                <FaLinkedin className="hover:text-blue-400 transition" />
+                <FaLinkedin className="hover:text-blue-400 transition duration-200" />
               </a>
               <a href="https://youtube.com/@careerinitiator?si=kxLr6jRkc2tn3Wy8" target="_blank">
-                <FaYoutube className="hover:text-red-500 transition" />
+                <FaYoutube className="hover:text-red-500 transition duration-200" />
               </a>
               <a href="https://wa.me/917987081188" target="_blank">
-                <FaWhatsapp className="hover:text-green-500 transition" />
+                <FaWhatsapp className="hover:text-green-500 transition duration-200" />
               </a>
             </div>
           </div>
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
+        <div className="mt-14 border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
           <p>© {new Date().getFullYear()} Career Initiator. All rights reserved.</p>
-
-          <div className="flex gap-5 mt-3 md:mt-0">
-            <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/terms">Terms</Link>
-            <Link href="/contact">Contact</Link>
+          <div className="flex gap-6 mt-3 md:mt-0">
+            <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition">Terms</Link>
+            <Link href="/contact" className="hover:text-white transition">Contact</Link>
           </div>
         </div>
-
       </div>
     </footer>
   );
