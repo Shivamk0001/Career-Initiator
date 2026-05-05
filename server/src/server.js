@@ -11,7 +11,6 @@ import userRoutes from "./routes/userRoutes.js";
 import publicRoutes from "./routes/publicRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import { notFound, errorHandler } from "./middleware/error.js";
-
 const app = express();
 connectDB();
 
