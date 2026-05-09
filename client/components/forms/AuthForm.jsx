@@ -78,6 +78,7 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
               password: form.password,
               phone: form.phone,
               address: form.address.trim(),
+              city: form.address.trim(),
               stream: form.stream,
               qualification: form.level,
               educationLevel: form.level,

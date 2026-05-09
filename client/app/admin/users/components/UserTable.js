@@ -4,7 +4,7 @@ export default function UserTable({ users, pagination, filters, onPageChange, on
   return (
     <>
       <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200">
-        <table className="w-full min-w-[980px] text-left text-sm">
+        <table className="w-full min-w-[1080px] text-left text-sm">
           <thead className="bg-slate-50 text-slate-600">
             <tr>
               <th className="px-3 py-2">Name</th>
@@ -12,6 +12,7 @@ export default function UserTable({ users, pagination, filters, onPageChange, on
               <th className="px-3 py-2">Phone</th>
               <th className="px-3 py-2">City</th>
               <th className="px-3 py-2">Qualification</th>
+              <th className="px-3 py-2">Stream</th>
               <th className="px-3 py-2">Role</th>
               <th className="px-3 py-2">Status</th>
               <th className="px-3 py-2">Created</th>
@@ -26,6 +27,7 @@ export default function UserTable({ users, pagination, filters, onPageChange, on
                 <td className="px-3 py-2">{user.phone || "-"}</td>
                 <td className="px-3 py-2">{user.city || "-"}</td>
                 <td className="px-3 py-2">{user.qualification || user.educationLevel || "-"}</td>
+                <td className="px-3 py-2">{user.stream || "-"}</td>
                 <td className="px-3 py-2">{user.role}</td>
                 <td className="px-3 py-2">
                   <span className={`rounded-full px-2 py-1 text-xs ${user.isBlocked ? "bg-rose-100 text-rose-700" : "bg-emerald-100 text-emerald-700"}`}>

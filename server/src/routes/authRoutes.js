@@ -19,15 +19,19 @@ function normalizeUserPayload(body = {}) {
   const password = body.password || "";
   const phone = (body.phone || "").trim();
 
-  let address = (body.address || "").trim();
-  const city = (body.city || "").trim();
-  if (city) {
+  const rawAddress = (body.address || "").trim();
+  const rawCity = (body.city || "").trim();
+
+  let address = rawAddress;
+  if (rawCity) {
     if (!address) {
-      address = city;
-    } else if (!address.includes(city)) {
-      address = `${address}, ${city}`;
+      address = rawCity;
+    } else if (!address.includes(rawCity)) {
+      address = `${address}, ${rawCity}`;
     }
   }
+
+  const city = rawCity || rawAddress;
 
   const stream = (body.stream || "").trim();
   const level = (body.level || "").trim();
@@ -40,6 +44,7 @@ function normalizeUserPayload(body = {}) {
     password,
     phone,
     address,
+    city,
     stream,
     qualification,
     educationLevel: educationLevel || qualification
@@ -52,7 +57,7 @@ function resolveRole(email, plainPassword) {
 
 router.post(["/signup", "/register"], async (req, res) => {
   try {
-    const { name, email, password, phone, address, stream, qualification, educationLevel } =
+    const { name, email, password, phone, address, city, stream, qualification, educationLevel } =
       normalizeUserPayload(req.body);
     if (!name || !email || !password) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -68,16 +73,23 @@ router.post(["/signup", "/register"], async (req, res) => {
       password: hashedPassword,
       phone,
       address,
+      city,
       stream,
       qualification,
       educationLevel,
-      city: "",
       role: resolveRole(email, password)
     });
 
     return res.status(201).json({
       token: signToken(user._id),
-      user: { id: user._id, name: user.name || user.fullName || "", email: user.email, role: user.role }
+      user: {
+        id: user._id,
+        name: user.name || user.fullName || "",
+        email: user.email,
+        role: user.role,
+        stream: user.stream || "",
+        city: user.city || ""
+      }
     });
   } catch (error) {
     return res.status(500).json({ message: "Signup failed" });
@@ -117,7 +129,9 @@ router.post("/login", async (req, res) => {
         id: user._id,
         name: user.name || user.fullName || "",
         email: user.email,
-        role
+        role,
+        stream: user.stream || "",
+        city: user.city || ""
       }
     });
   } catch (error) {
