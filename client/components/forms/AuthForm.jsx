@@ -46,7 +46,7 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
       return false;
     }
     if (mode === "signup") {
-      if (!form.fullName || !form.phone || !form.stream || !form.level) {
+      if (!form.fullName || !form.phone || !form.stream || !form.level || !form.address?.trim()) {
         setError("All profile fields are required.");
         return false;
       }
@@ -77,10 +77,10 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
               email: form.email,
               password: form.password,
               phone: form.phone,
-              address: form.address,
-              city: "",
+              address: form.address.trim(),
               stream: form.stream,
               qualification: form.level,
+              educationLevel: form.level,
             }
           : {
               email: form.email,
@@ -262,6 +262,7 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
                     value={form.address}
                     onChange={handleChange}
                     className={`${inputClass} sm:col-span-2 h-20 resize-none`}
+                    required
                   />
                 </motion.div>
               )}

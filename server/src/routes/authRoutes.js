@@ -14,15 +14,35 @@ function signToken(id) {
 }
 
 function normalizeUserPayload(body = {}) {
+  const name = (body.name || body.fullName || "").trim();
+  const email = (body.email || "").toLowerCase().trim();
+  const password = body.password || "";
+  const phone = (body.phone || "").trim();
+
+  let address = (body.address || "").trim();
+  const city = (body.city || "").trim();
+  if (city) {
+    if (!address) {
+      address = city;
+    } else if (!address.includes(city)) {
+      address = `${address}, ${city}`;
+    }
+  }
+
+  const stream = (body.stream || "").trim();
+  const level = (body.level || "").trim();
+  const educationLevel = (body.educationLevel || level || "").trim();
+  const qualification = (body.qualification || level || educationLevel || "").trim();
+
   return {
-    name: (body.name || body.fullName || "").trim(),
-    email: (body.email || "").toLowerCase().trim(),
-    password: body.password || "",
-    phone: (body.phone || "").trim(),
-    address: (body.address || "").trim(),
-    city: (body.city || "").trim(),
-    stream: (body.stream || "").trim(),
-    qualification: (body.qualification || body.educationLevel || body.level || "").trim()
+    name,
+    email,
+    password,
+    phone,
+    address,
+    stream,
+    qualification,
+    educationLevel: educationLevel || qualification
   };
 }
 
@@ -32,7 +52,8 @@ function resolveRole(email, plainPassword) {
 
 router.post(["/signup", "/register"], async (req, res) => {
   try {
-    const { name, email, password, phone, address, city, stream, qualification } = normalizeUserPayload(req.body);
+    const { name, email, password, phone, address, stream, qualification, educationLevel } =
+      normalizeUserPayload(req.body);
     if (!name || !email || !password) {
       return res.status(400).json({ message: "Missing required fields" });
     }
@@ -47,10 +68,10 @@ router.post(["/signup", "/register"], async (req, res) => {
       password: hashedPassword,
       phone,
       address,
-      city,
       stream,
       qualification,
-      educationLevel: qualification,
+      educationLevel,
+      city: "",
       role: resolveRole(email, password)
     });
 
