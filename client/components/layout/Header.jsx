@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { clearSession, getSession } from "@/lib/auth";
 import { Search, User, Mail } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from "react-icons/fa6";
@@ -17,8 +18,26 @@ const navItems = [
 ];
 
 export default function Header() {
-  const session = useMemo(() => getSession(), []);
-  const user = session?.user;
+  const router = useRouter();
+  const [session, setSession] = useState({ token: null, user: null });
+  const user = session.user;
+
+  useEffect(() => {
+    const syncSession = () => {
+      setSession(getSession());
+    };
+
+    syncSession();
+    window.addEventListener("storage", syncSession);
+    window.addEventListener("focus", syncSession);
+    window.addEventListener("ci-auth-changed", syncSession);
+
+    return () => {
+      window.removeEventListener("storage", syncSession);
+      window.removeEventListener("focus", syncSession);
+      window.removeEventListener("ci-auth-changed", syncSession);
+    };
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full shadow-sm">
@@ -114,17 +133,18 @@ export default function Header() {
             ) : (
               <div className="flex items-center gap-4">
                 <Link
-                  href={user.role === "admin" ? "/admin" : "/dashboard"}
+                  href={user.role === "admin" ? "/admin" : "/"}
                   className="bg-slate-50 border border-slate-200 px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-white hover:border-cyan-400 transition-all text-slate-700"
                 >
-                  {user.fullName?.split(" ")[0]}
+                  {(user.name || user.fullName || "User").split(" ")[0]}
                 </Link>
 
                 <button
                   className="text-[10px] font-bold text-slate-400 hover:text-red-500 transition-colors uppercase tracking-widest"
                   onClick={() => {
                     clearSession();
-                    window.location.href = "/";
+                    router.push("/login");
+                    router.refresh();
                   }}
                 >
                   Logout

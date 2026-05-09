@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, X, ArrowRight, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { setSession } from "@/lib/auth";
+import { apiFetch } from "@/lib/api";
 
 export default function AuthForm({ mode: initialMode = "login", onClose }) {
+  const router = useRouter();
   const [mode, setMode] = useState(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,36 +69,34 @@ export default function AuthForm({ mode: initialMode = "login", onClose }) {
         return;
       }
 
-      // 1. 🌟 BACKEND SERVER URL APNE ENDPOINTS ME ADD KAREIN
-      const endpoint =
-        mode === "signup"
-          ? "http://localhost:5000/api/auth/signup"
-          : "http://localhost:5000/api/auth/login";
-
+      const endpoint = mode === "signup" ? "/auth/register" : "/auth/login";
       const payload =
         mode === "signup"
-          ? form
+          ? {
+              name: form.fullName,
+              email: form.email,
+              password: form.password,
+              phone: form.phone,
+              address: form.address,
+              city: "",
+              stream: form.stream,
+              qualification: form.level,
+            }
           : {
               email: form.email,
               password: form.password,
             };
 
-      const response = await fetch(endpoint, {
+      const data = await apiFetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
-      
-      // 2. 🌟 !data.success WALI CONDITION KO HATA DIJIYE, KYUKI BACKEND SE APAN SIDA STATUS CODE CONTROL KAR RHE HAIN
-      if (!response.ok) {
-        throw new Error(data.message || "Authentication failed.");
-      }
-
       if (mode === "login" && data.token) {
         setSession(data.token, data.user);
-        localStorage.setItem("ci_auth_ready", "true");
+        const destination = data.user?.role === "admin" ? "/admin" : "/";
+        router.push(destination);
+        router.refresh();
       }
 
       setSuccess(data.message || "Success!");

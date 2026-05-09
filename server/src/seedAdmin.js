@@ -8,19 +8,20 @@ import User from "./models/User.js";
 async function seedAdmin() {
   await connectDB();
 
-  const email = process.argv[2] || "admin@careerinitiator.com";
-  const password = process.argv[3] || "Admin@123";
-  const fullName = "Platform Admin";
+  const email = process.argv[2] || "admin@gmail.com";
+  const password = process.argv[3] || "admin123";
+  const name = "Platform Admin";
 
   const existing = await User.findOne({ email: email.toLowerCase() });
   if (existing) {
     existing.role = "admin";
+    existing.name = existing.name || name;
     if (password) existing.password = await bcrypt.hash(password, 10);
     await existing.save();
     console.log("Existing user promoted to admin");
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({ fullName, email: email.toLowerCase(), password: hashedPassword, role: "admin" });
+    await User.create({ name, email: email.toLowerCase(), password: hashedPassword, role: "admin" });
     console.log("Admin user created");
   }
 

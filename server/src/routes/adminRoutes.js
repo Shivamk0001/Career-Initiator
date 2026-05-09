@@ -9,8 +9,10 @@ const router = express.Router();
 router.use(protect, authorize("admin"));
 
 router.get("/stats", async (req, res) => {
-  const [users, colleges, courses, exams, careers, blogs] = await Promise.all([
+  const [users, activeUsers, recentRegistrations, colleges, courses, exams, careers, blogs] = await Promise.all([
     User.countDocuments(),
+    User.countDocuments({ isBlocked: false }),
+    User.find().select("-password").sort({ createdAt: -1 }).limit(5),
     resourceMap.colleges.countDocuments(),
     resourceMap.courses.countDocuments(),
     resourceMap.exams.countDocuments(),
@@ -18,7 +20,7 @@ router.get("/stats", async (req, res) => {
     resourceMap.blogs.countDocuments()
   ]);
 
-  res.json({ users, colleges, courses, exams, careers, blogs });
+  res.json({ users, activeUsers, recentRegistrations, colleges, courses, exams, careers, blogs });
 });
 
 router.get("/users", async (req, res) => {
@@ -29,9 +31,16 @@ router.get("/users", async (req, res) => {
 router.patch("/users/:id/role", async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.params.id,
-    { role: req.body.role === "admin" ? "admin" : "student" },
+    { role: req.body.role === "admin" ? "admin" : "user" },
     { new: true }
   ).select("-password");
+  res.json(user);
+});
+
+router.patch("/users/:id/block", async (req, res) => {
+  const shouldBlock = Boolean(req.body?.isBlocked);
+  const user = await User.findByIdAndUpdate(req.params.id, { isBlocked: shouldBlock }, { new: true }).select("-password");
+  if (!user) return res.status(404).json({ message: "User not found" });
   res.json(user);
 });
 
