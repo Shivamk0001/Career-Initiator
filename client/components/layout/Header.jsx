@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { clearSession, getSession } from "@/lib/auth";
 import { Search, User, Mail } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from "react-icons/fa6";
@@ -19,6 +19,7 @@ const navItems = [
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [session, setSession] = useState({ token: null, user: null });
   const user = session.user;
 
@@ -38,6 +39,10 @@ export default function Header() {
       window.removeEventListener("ci-auth-changed", syncSession);
     };
   }, []);
+
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin") || pathname?.startsWith("/profile")) {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full shadow-sm">
@@ -153,9 +158,12 @@ export default function Header() {
             )}
 
             {/* PROFILE ICON */}
-            <button className="p-2 bg-slate-50 text-slate-600 rounded-full border border-slate-200 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm">
+            <Link
+              href={user ? "/dashboard" : "/login"}
+              className="p-2 bg-slate-50 text-slate-600 rounded-full border border-slate-200 hover:border-cyan-500 hover:text-cyan-600 transition-all shadow-sm"
+            >
               <User size={18} />
-            </button>
+            </Link>
           </div>
 
         </div>

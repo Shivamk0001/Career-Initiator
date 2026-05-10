@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   FaFacebook,
   FaInstagram,
@@ -8,6 +11,12 @@ import {
 } from "react-icons/fa6";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin") || pathname?.startsWith("/profile")) {
+    return null;
+  }
+
   return (
     // Removed mt-16 to fix the black gap issue
     <footer className="bg-[#002147] text-white border-t border-white/10">
