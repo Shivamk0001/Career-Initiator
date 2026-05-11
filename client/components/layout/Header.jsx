@@ -104,26 +104,38 @@ export default function Header() {
 
          {/* NAVIGATION - Slate Grey text for a professional look */}
 <nav className="hidden lg:flex items-center gap-8">
-  {navItems.map(([label, href]) => (
-    <Link
-      key={label}
-      href={href}
-      className="relative text-[13px] font-bold uppercase tracking-tight text-slate-900 hover:text-orange-500 transition-colors group"
-    >
-      {label}
-      {/* Bottom line animation - Orange color */}
-      <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-    </Link>
-  ))}
+  {navItems.map(([label, href]) => {
+    const isActive = href !== "#" && pathname === href;
+    return (
+      <Link
+        key={label}
+        href={href}
+        className={`relative text-[13px] font-bold uppercase tracking-tight transition-colors group ${
+          isActive ? "text-orange-500" : "text-slate-900 hover:text-orange-500"
+        }`}
+      >
+        {label}
+        <span
+          className={`absolute -bottom-1 left-0 h-[2px] bg-orange-500 transition-all duration-300 ${
+            isActive ? "w-full" : "w-0 group-hover:w-full"
+          }`}
+        />
+      </Link>
+    );
+  })}
 </nav>
 
           {/* RIGHT ACTIONS */}
           <div className="flex items-center gap-4">
 
-            {/* SEARCH */}
-            <button className="p-2 text-slate-900 hover:text-cyan-600 hover:bg-slate-50 rounded-full transition-all">
+            {/* SEARCH — jump to college discovery */}
+            <Link
+              href="/colleges"
+              className="p-2 text-slate-900 hover:text-cyan-600 hover:bg-slate-50 rounded-full transition-all"
+              aria-label="Search colleges"
+            >
               <Search size={20} />
-            </button>
+            </Link>
 
             <div className="h-6 w-[1px] bg-slate-200 mx-1"></div>
 
