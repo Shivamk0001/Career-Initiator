@@ -11,7 +11,8 @@ import CollegeGrid from "@/components/colleges/CollegeGrid";
 import CollegeGridSkeleton from "@/components/colleges/CollegeSkeleton";
 import EmptyState from "@/components/colleges/EmptyState";
 import Pagination from "@/components/colleges/Pagination";
-import { MOCK_TOP_COLLEGES, QUICK_CATEGORIES } from "@/components/colleges/collegeSearchConstants";
+import { QUICK_CATEGORIES } from "@/components/colleges/collegeSearchConstants";
+import { TOP_COLLEGES } from "@/components/colleges/topCollegesData";
 import {
   defaultFilters,
   enrichCollege,
@@ -22,27 +23,25 @@ import {
 const WISH_KEY = "ci_college_wishlist";
 const CMP_KEY = "ci_college_compare";
 
-function buildFeaturedFromMock() {
-  return MOCK_TOP_COLLEGES.map((m, i) => {
-    const e = enrichCollege(
+function buildCuratedSpotlight() {
+  return TOP_COLLEGES.map((m, i) =>
+    enrichCollege(
       {
         name: m.name,
+        shortName: m.shortName,
         description: m.description || "",
         image: m.image,
         website_link: m.website_link,
-        location: m.location
+        location: m.location,
+        tags: m.tags,
+        ranking: m.ranking,
+        rating: m.rating,
+        feesDisplay: m.feesDisplay,
+        courses: m.courses
       },
       i
-    );
-    return {
-      ...e,
-      ranking: m.ranking,
-      rating: m.rating,
-      feesDisplay: m.feesDisplay,
-      courses: m.courses,
-      coursesText: m.courses.join(" · ")
-    };
-  });
+    )
+  );
 }
 
 function readList(key) {
@@ -75,31 +74,13 @@ export default function CollegeSearchPage() {
   const [filters, setFilters] = useState(defaultFilters);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [toast, setToast] = useState("");
-  const [topColleges, setTopColleges] = useState(() => buildFeaturedFromMock());
+  const [topColleges] = useState(() => buildCuratedSpotlight());
   const [wishlist, setWishlist] = useState([]);
   const [compareList, setCompareList] = useState([]);
 
   useEffect(() => {
     setWishlist(readList(WISH_KEY));
     setCompareList(readList(CMP_KEY));
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const { results } = await fetchCollegeSearchPage("NIRF ranked colleges India 2024", 1);
-        if (cancelled) return;
-        if (results.length >= 8) {
-          setTopColleges(results.slice(0, 16).map((r, i) => enrichCollege(r, i)));
-        }
-      } catch {
-        /* keep mock */
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
   const showToast = (msg) => {
@@ -321,8 +302,8 @@ export default function CollegeSearchPage() {
 
             {!loading && query && !enriched.length ? (
               <EmptyState
-                title="No results found"
-                subtitle="Try different keywords or check your SerpApi configuration in .env.local."
+                title="No matching college pages"
+                subtitle="Listicles, ranking portals, and PDFs are filtered out. Try an official institute name (e.g. “IIT Hyderabad” or “BITS Pilani”) or check SERPAPI_KEY in .env.local."
                 hasQuery
               />
             ) : null}
