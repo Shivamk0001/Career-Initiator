@@ -14,7 +14,7 @@ const navItems = [
   ["Courses", "/courses"],
   ["Careers", "/careers"],
   ["Latest Updates", "/latest-updates"],
-  ["More", "#"]
+  ["More", "/more"]
 ];
 
 export default function Header() {
