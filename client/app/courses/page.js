@@ -1,14 +1,16 @@
-import ResourceGrid from "@/components/common/ResourceGrid";
-import { getResource } from "@/lib/serverApi";
+import CourseListingPage from "@/components/courses/CourseListingPage";
 
-export const metadata = { title: "Courses | Career Initiator" };
+export const metadata = {
+  title: "Courses in India | Career Initiator",
+  description:
+    "Explore engineering, medical, MBA, law, commerce, science, design, and skill programmes. Compare fees, careers, entrances, and colleges in one premium directory.",
+  openGraph: {
+    title: "Courses in India | Career Initiator",
+    description: "Discover UG, PG, diploma, and certification courses across major Indian streams.",
+    type: "website"
+  }
+};
 
-export default async function CoursesPage() {
-  const items = await getResource("courses");
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-10">
-      <h1 className="mb-6 text-3xl font-bold">Courses</h1>
-      <ResourceGrid items={items} basePath="/courses" />
-    </section>
-  );
+export default function CoursesPage() {
+  return <CourseListingPage />;
 }
