@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
-const ADMIN_EMAIL = "admin@gmail.com";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_EMAIL = "carrerinitiatoradmin@gmail.com";
+const ADMIN_PASSWORD = "hSU6yFD2bcr1tcaz";
 
 function signToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
