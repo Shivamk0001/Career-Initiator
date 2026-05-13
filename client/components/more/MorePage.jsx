@@ -72,6 +72,7 @@ const STATS = [
 ];
 
 const QUICK = [
+  { href: "/about", label: "About Us" },
   { href: "/careers", label: "Careers" },
   { href: "/colleges", label: "Colleges" },
   { href: "/exams", label: "Exams" },

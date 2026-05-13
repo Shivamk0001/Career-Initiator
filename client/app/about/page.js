@@ -1,12 +1,17 @@
-export default function AboutPage() {
-  return (
-    <section className="mx-auto max-w-5xl px-4 py-10">
-      <div className="glass rounded-2xl p-6">
-        <h1 className="text-3xl font-bold">About Career Initiator</h1>
-        <p className="mt-4 text-slate-300">
-          Career Initiator helps students make better academic and career decisions with trusted guidance.
-        </p>
-      </div>
-    </section>
-  );
+import AboutPage from "@/components/about/AboutPage";
+
+export const metadata = {
+  title: "About Us | Career Initiator",
+  description:
+    "Learn about Career Initiator — mission, vision, values, and how we help Indian students with careers, colleges, courses, exams, and trusted guidance.",
+  openGraph: {
+    title: "About Us | Career Initiator",
+    description:
+      "Career Initiator: education technology for smarter career decisions — careers, colleges, courses, exams, and human support.",
+    type: "website"
+  }
+};
+
+export default function AboutRoutePage() {
+  return <AboutPage />;
 }

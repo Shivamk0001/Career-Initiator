@@ -10,14 +10,12 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from "reac
 import { SITE_CONTACT } from "@/lib/siteContact";
 
 const navItems = [
-    ["Careers", "/careers"],
-    ["Courses", "/courses"],
-     ["Exams", "/exams"],
+  ["Careers", "/careers"],
+  ["Courses", "/courses"],
+  ["Exams", "/exams"],
   ["Colleges", "/colleges"],
- 
-  
-
   ["Latest Updates", "/latest-updates"],
+  ["About", "/about"],
   ["More", "/more"]
 ];
 

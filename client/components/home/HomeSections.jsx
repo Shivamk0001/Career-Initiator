@@ -288,22 +288,23 @@ export function TrustStats() {
   );
 }
 
-export function TestimonialsHome() {
-  const items = [
-    {
-      name: "Parent, Class 10",
-      text: "We finally had a single place to compare streams and entrance routes. The tone was practical—not generic motivation.",
-    },
-    {
-      name: "Engineering aspirant",
-      text: "Exam section saved my semester. I stopped missing form dates and could see backup exams that matched my subjects.",
-    },
-    {
-      name: "Working professional",
-      text: "I used the explorer to plan an MBA pivot. Having career context made manager conversations much easier.",
-    },
-  ];
+export const HOME_TESTIMONIAL_ITEMS = [
+  {
+    name: "Parent, Class 10",
+    text: "We finally had a single place to compare streams and entrance routes. The tone was practical—not generic motivation.",
+  },
+  {
+    name: "Engineering aspirant",
+    text: "Exam section saved my semester. I stopped missing form dates and could see backup exams that matched my subjects.",
+  },
+  {
+    name: "Working professional",
+    text: "I used the explorer to plan an MBA pivot. Having career context made manager conversations much easier.",
+  },
+];
 
+export function TestimonialsHome() {
+  const items = HOME_TESTIMONIAL_ITEMS;
   return (
     <section className="px-4 py-20 md:py-28 bg-white">
       <div className="mx-auto max-w-6xl text-center">

@@ -61,7 +61,16 @@ export default function Footer() {
               <li>24/7 Live Help</li>
               <li>Feedback</li>
               <li>Student Support</li>
-              <li>Contact Us</li>
+              <li>
+                <Link href="/about" className="transition hover:text-white">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition hover:text-white">
+                  Contact Us
+                </Link>
+              </li>
               <li>FAQs</li>
             </ul>
           </div>
