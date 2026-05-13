@@ -8,8 +8,8 @@ import User from "./models/User.js";
 async function seedAdmin() {
   await connectDB();
 
-  const email = process.argv[2] || "admin@gmail.com";
-  const password = process.argv[3] || "admin123";
+  const email = process.argv[2] || "carrerinitiatoradmin@gmail.com";
+  const password = process.argv[3] || "hSU6yFD2bcr1tcaz";
   const name = "Platform Admin";
 
   const existing = await User.findOne({ email: email.toLowerCase() });
