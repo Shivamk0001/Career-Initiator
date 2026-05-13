@@ -25,6 +25,7 @@ import {
   Zap
 } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaYoutube } from "react-icons/fa6";
+import { SITE_CONTACT } from "@/lib/siteContact";
 
 const FAQS = [
   {
@@ -325,15 +326,15 @@ export default function MorePage() {
               <Building2 className="h-6 w-6 shrink-0 text-orange-500" aria-hidden />
               <div>
                 <p className="text-xs font-bold uppercase text-slate-500">Company</p>
-                <p className="mt-1 font-semibold text-slate-900">Career Initiator</p>
+                <p className="mt-1 font-semibold text-slate-900">{SITE_CONTACT.companyName}</p>
               </div>
             </div>
             <div className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/80 p-5">
               <Mail className="h-6 w-6 shrink-0 text-orange-500" aria-hidden />
               <div>
                 <p className="text-xs font-bold uppercase text-slate-500">Email</p>
-                <a href="mailto:careerinitiator1188@gmail.com" className="mt-1 block font-semibold text-[#002147] hover:underline">
-                  careerinitiator1188@gmail.com
+                <a href={`mailto:${SITE_CONTACT.email}`} className="mt-1 block font-semibold text-[#002147] hover:underline">
+                  {SITE_CONTACT.email}
                 </a>
               </div>
             </div>
@@ -341,8 +342,8 @@ export default function MorePage() {
               <Phone className="h-6 w-6 shrink-0 text-orange-500" aria-hidden />
               <div>
                 <p className="text-xs font-bold uppercase text-slate-500">Phone</p>
-                <a href="tel:+917987081188" className="mt-1 block font-semibold text-[#002147] hover:underline">
-                  +91 79870 81188
+                <a href={`tel:${SITE_CONTACT.phoneE164}`} className="mt-1 block font-semibold text-[#002147] hover:underline">
+                  {SITE_CONTACT.phoneDisplay}
                 </a>
               </div>
             </div>
@@ -350,14 +351,14 @@ export default function MorePage() {
               <MapPin className="h-6 w-6 shrink-0 text-orange-500" aria-hidden />
               <div>
                 <p className="text-xs font-bold uppercase text-slate-500">Address</p>
-                <p className="mt-1 font-semibold text-slate-900">Bhopal, Madhya Pradesh, India</p>
+                <p className="mt-1 font-semibold text-slate-900">{SITE_CONTACT.addressFull}</p>
               </div>
             </div>
             <div className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/80 p-5 sm:col-span-2">
               <Clock className="h-6 w-6 shrink-0 text-orange-500" aria-hidden />
               <div>
                 <p className="text-xs font-bold uppercase text-slate-500">Working hours</p>
-                <p className="mt-1 font-semibold text-slate-900">Monday to Saturday, 9:00 AM to 7:00 PM</p>
+                <p className="mt-1 font-semibold text-slate-900">{SITE_CONTACT.workingHours}</p>
               </div>
             </div>
           </div>
@@ -375,19 +376,19 @@ export default function MorePage() {
           <h2 className="text-xl font-bold sm:text-2xl">Follow us</h2>
           <p className="mt-2 text-sm text-blue-100/90">Tips, deadline reminders, and student stories on your favourite channels.</p>
           <div className="mt-6 flex flex-wrap gap-4 text-2xl">
-            <a href="https://www.facebook.com/profile.php?id=61582953866454" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="Facebook">
+            <a href={SITE_CONTACT.social.facebook} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="Facebook">
               <FaFacebook />
             </a>
-            <a href="https://www.instagram.com/careerinitiator.in?igsh=eDNxdHpiOG5jYXR6" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="Instagram">
+            <a href={SITE_CONTACT.social.instagram} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="LinkedIn">
+            <a href={SITE_CONTACT.social.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
-            <a href="https://youtube.com/@careerinitiator?si=kxLr6jRkc2tn3Wy8" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="YouTube">
+            <a href={SITE_CONTACT.social.youtube} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="YouTube">
               <FaYoutube />
             </a>
-            <a href="https://wa.me/917987081188" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="WhatsApp">
+            <a href={SITE_CONTACT.social.whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
           </div>

@@ -7,12 +7,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { clearSession, getSession } from "@/lib/auth";
 import { Search, User, Mail } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from "react-icons/fa6";
+import { SITE_CONTACT } from "@/lib/siteContact";
 
 const navItems = [
+    ["Careers", "/careers"],
+    ["Courses", "/courses"],
+     ["Exams", "/exams"],
   ["Colleges", "/colleges"],
-  ["Exams", "/exams"],
-  ["Courses", "/courses"],
-  ["Careers", "/careers"],
+ 
+  
+
   ["Latest Updates", "/latest-updates"],
   ["More", "/more"]
 ];
@@ -52,11 +56,11 @@ export default function Header() {
           
           {/* EMAIL */}
           <a
-            href="mailto:careerinitiator1188@gmail.com"
+            href={`mailto:${SITE_CONTACT.email}`}
             className="flex items-center gap-2 hover:text-rose-200 transition-colors normal-case"
           >
             <Mail size={14} className="bg-[#002147] text-white" />
-            <span className="lowercase font-medium">careerinitiator1188@gmail.com</span>
+            <span className="lowercase font-medium">{SITE_CONTACT.email}</span>
           </a>
 
           {/* SOCIAL LINKS */}
@@ -66,19 +70,19 @@ export default function Header() {
             </span>
 
             <div className="flex gap-4 items-center text-slate-500">
-              <Link href="https://www.facebook.com/profile.php?id=61582953866454" target="_blank">
+              <Link href={SITE_CONTACT.social.facebook} target="_blank" rel="noopener noreferrer">
                 <FaFacebook className="hover:text-[#255fab] transition-all hover:scale-110 text-sm" />
               </Link>
-              <Link href="https://www.instagram.com/careerinitiator.in?igsh=eDNxdHpiOG5jYXR6" target="_blank">
+              <Link href={SITE_CONTACT.social.instagram} target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="hover:text-[#E4405F] transition-all hover:scale-110 text-sm" />
               </Link>
-              <Link href="https://linkedin.com" target="_blank">
+              <Link href={SITE_CONTACT.social.linkedin} target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="hover:text-[#77a4d2] transition-all hover:scale-110 text-sm" />
               </Link>
-              <Link href="https://wa.me/917987081188" target="_blank">
+              <Link href={SITE_CONTACT.social.whatsapp} target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp className="hover:text-[#25D366] transition-all hover:scale-110 text-base" />
               </Link>
-              <Link href="https://youtube.com/@careerinitiator?si=kxLr6jRkc2tn3Wy8" target="_blank">
+              <Link href={SITE_CONTACT.social.youtube} target="_blank" rel="noopener noreferrer">
                 <FaYoutube className="hover:text-[#FF0000] transition-all hover:scale-110 text-sm" />
               </Link>
             </div>
@@ -130,7 +134,7 @@ export default function Header() {
 
             {/* SEARCH — jump to college discovery */}
             <Link
-              href="/colleges"
+              href="#"
               className="p-2 text-slate-900 hover:text-cyan-600 hover:bg-slate-50 rounded-full transition-all"
               aria-label="Search colleges"
             >
@@ -156,7 +160,7 @@ export default function Header() {
                   {(user.name || user.fullName || "User").split(" ")[0]}
                 </Link>
 
-                <button
+                {/* <button
                   className="text-[10px] font-bold text-slate-400 hover:text-red-500 transition-colors uppercase tracking-widest"
                   onClick={() => {
                     clearSession();
@@ -165,7 +169,7 @@ export default function Header() {
                   }}
                 >
                   Logout
-                </button>
+                </button> */}
               </div>
             )}
 

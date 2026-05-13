@@ -9,6 +9,7 @@ import {
   FaYoutube,
   FaWhatsapp,
 } from "react-icons/fa6";
+import { SITE_CONTACT } from "@/lib/siteContact";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -69,26 +70,26 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4 text-lg">Get in Touch</h3>
             <div className="text-sm text-white/70 space-y-2">
-              <p>Bhopal, India</p>
-              <p>Phone: +91 7987081188</p>
-              <p>Email: careerinitiator1188@gmail.com</p>
+              <p>{SITE_CONTACT.addressShort}</p>
+              <p>Phone: {SITE_CONTACT.phoneDisplayCompact}</p>
+              <p>Email: {SITE_CONTACT.email}</p>
             </div>
 
             {/* SOCIAL (Branding Colors on Hover) */}
             <div className="flex gap-4 mt-6 text-2xl">
-              <a href="https://www.facebook.com/profile.php?id=61582953866454" target="_blank">
+              <a href={SITE_CONTACT.social.facebook} target="_blank" rel="noopener noreferrer">
                 <FaFacebook className="hover:text-blue-500 transition duration-200" />
               </a>
-              <a href="https://www.instagram.com/careerinitiator.in?igsh=eDNxdHpiOG5jYXR6" target="_blank">
+              <a href={SITE_CONTACT.social.instagram} target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="hover:text-pink-500 transition duration-200" />
               </a>
-              <a href="https://linkedin.com" target="_blank">
+              <a href={SITE_CONTACT.social.linkedin} target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="hover:text-blue-400 transition duration-200" />
               </a>
-              <a href="https://youtube.com/@careerinitiator?si=kxLr6jRkc2tn3Wy8" target="_blank">
+              <a href={SITE_CONTACT.social.youtube} target="_blank" rel="noopener noreferrer">
                 <FaYoutube className="hover:text-red-500 transition duration-200" />
               </a>
-              <a href="https://wa.me/917987081188" target="_blank">
+              <a href={SITE_CONTACT.social.whatsapp} target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp className="hover:text-green-500 transition duration-200" />
               </a>
             </div>
