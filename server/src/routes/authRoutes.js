@@ -4,8 +4,10 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
-const ADMIN_EMAIL = "carrerinitiatoradmin@gmail.com";
-const ADMIN_PASSWORD = "hSU6yFD2bcr1tcaz";
+
+/** Prefer env so deployments stay in sync with `seed:admin` and no stale secrets in DB-only scenarios. */
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || "carrerinitiatoradmin@gmail.com").toLowerCase().trim();
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "hSU6yFD2bcr1tcaz";
 
 function signToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -113,12 +115,10 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    // Admin credentials are an EXTRA condition for returning "admin" role.
-    const isAdminLogin = email === ADMIN_EMAIL && password === ADMIN_PASSWORD;
-    const role = isAdminLogin ? "admin" : "user";
+    // Platform admin: same email + password as configured (matches seed script). Otherwise keep stored role.
+    const isPlatformAdminLogin = email === ADMIN_EMAIL && password === ADMIN_PASSWORD;
+    const role = isPlatformAdminLogin ? "admin" : user.role || "user";
 
-    // Keep DB in sync with the admin-credentials rule.
-    // Use update query instead of document.save() to avoid legacy-document validation issues.
     if (user.role !== role) {
       await User.updateOne({ _id: user._id }, { $set: { role } });
     }
